@@ -56,6 +56,47 @@ int Delete(struct Array *arr, int index)
 	return 0;
 }
 
+void swap(int *x, int *y)
+{
+	*x = *x + *y;
+	*y = *x - *y;
+	*x = *x - *y;
+}
+
+int LinearSearch(struct Array *arr, int key)
+{
+	int i;
+	for(i=0;i<arr->length; i++)
+	{
+		if(key==arr->A[i])
+		{
+			// Using move to head
+			/*
+			swap(&arr->A[i], &arr->A[0]);
+			return 0;
+			*/
+			return i;
+		}
+	}
+	return -1;
+}
+
+int BinarySearch(struct Array arr, int key)
+{
+	int l=0, mid, h=arr.length-1;
+
+	while(l<=h)
+	{
+		mid=(l+h)/2;
+		if(key==arr.A[mid])
+			return mid;
+		else if(key<arr.A[mid])
+			h=mid-1;
+		else
+			l=mid+1;
+	}
+	return -1;
+}
 
 int main()
 {
@@ -102,8 +143,17 @@ int main()
 	*/
 
 	// Delete
+	/*
 	printf("Deleting value at index 2: %d\n", Delete(&arr, 2));
 	Display(arr);
+	*/
+
+	// Linear Search
+	/*printf("Searching for 3: %d\n", LinearSearch(&arr, 3));
+	Display(arr);*/
+
+	// Binary Search
+	printf("Searching for 3: %d\n", BinarySearch(arr, 3));
 
 	return 0;
 }
